@@ -1,0 +1,46 @@
+﻿@model CodeFirst.Identity.AppUser
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayoutPage1.cshtml";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-danger text-light">
+                    <h2 class="text-center">Delete User</h2>
+                </div>
+                <div class="card-body">
+                    <p class="lead">Bạn có chắc chắn muốn xóa người dùng này không?</p>
+
+                    <dl class="row">
+                        <dt class="col-sm-3">Username:</dt>
+                        <dd class="col-sm-9">@Html.DisplayFor(model => model.UserName)</dd>
+
+                        <dt class="col-sm-3">Email:</dt>
+                        <dd class="col-sm-9">@Html.DisplayFor(model => model.Email)</dd>
+
+                        <dt class="col-sm-3">Phone Number:</dt>
+                        <dd class="col-sm-9">@Html.DisplayFor(model => model.PhoneNumber)</dd>
+
+                        <dt class="col-sm-3">City:</dt>
+                        <dd class="col-sm-9">@Html.DisplayFor(model => model.City)</dd>
+
+                        <dt class="col-sm-3">Birthday:</dt>
+                        <dd class="col-sm-9">@Html.DisplayFor(model => model.Birthday)</dd>
+                    </dl>
+
+                    @using (Html.BeginForm("Delete", "Users", new { id = Model.Id }, FormMethod.Post, new { @class = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    }
+
+                <a href="@Url.Action("Index", "Users")">Back to List</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

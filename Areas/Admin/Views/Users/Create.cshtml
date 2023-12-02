@@ -1,0 +1,43 @@
+﻿@model CodeFirst.Identity.AppUser
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayoutPage1.cshtml";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-primary text-light">
+                    <h2 class="text-center">Create User</h2>
+                </div>
+                <div class="card-body">
+                    @using (Html.BeginForm("Create", "Users", FormMethod.Post, new { @class = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.UserName, new { @class = "form-label" })
+                            @Html.TextBoxFor(model => model.UserName, new { placeholder = "Username", @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.Email, new { @class = "form-label" })
+                            @Html.TextBoxFor(model => model.Email, new { placeholder = "Email", @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.PasswordHash, new { @class = "form-label" })
+                            @Html.PasswordFor(model => model.PasswordHash, new { placeholder = "Password", @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.PasswordHash, "", new { @class = "text-danger" })
+                        </div>
+                        <!-- Add other properties as needed -->
+
+                        <button type="submit" class="btn btn-primary">Create</button>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

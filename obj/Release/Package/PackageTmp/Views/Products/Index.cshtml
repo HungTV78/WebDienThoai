@@ -1,0 +1,88 @@
+﻿@model List<CodeFirst.Models.Product>
+@{
+    ViewBag.Title = "Sản phẩm";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2 class="mt-3">Sản Phẩm</h2>
+@{
+    string iconClass1 = "fa-sort-asc";
+    string iconClass2 = "fa-sort-desc";
+}
+<br />
+<div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Sắp xếp theo Giá
+    </button>
+    <ul class="dropdown-menu">
+        <li>
+            @Html.ActionLink("Sắp xếp theo Giá tăng dần", "Index", new { SortClumn = "Price", IconClass = iconClass1, page = 1, search = ViewBag.Search }, new { @class = "dropdown-item" })
+            @if (ViewBag.SortClumn == "Price")
+            {
+                <i class="fa @ViewBag.IconClass"></i>
+            }
+        </li>
+        <li>
+            @Html.ActionLink("Sắp xếp theo Giá giảm dần", "Index", new { SortClumn = "Price", IconClass = iconClass2, page = 1, search = ViewBag.Search }, new { @class = "dropdown-item" })
+            @if (ViewBag.SortClumn == "Price")
+            {
+                <i class="fa @ViewBag.IconClass"></i>
+            }
+        </li>
+    </ul>
+</div>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-3" id="@item.Id">
+            <div class="card p-3 m-3">
+                <a href="@Url.Action("Detail", new { id = item.Id })"><img src="/Image/@item.Image" class="card-img-top" /></a>
+                <div class="card-body">
+                    <a class="nav-link" href="@Url.Action("Detail", new { id = item.Id })">
+                        <h5 class="card-title" style="height: 2.5em; overflow: hidden; text-overflow: ellipsis;">@item.Name</h5>
+                    </a>
+                    <p class="card-text" style="height: 2em; overflow: hidden; text-overflow: ellipsis; color: red;">
+                        <b>@item.Price.Value.ToString("C")</b>
+                    </p>
+                    <a href="/Cart/Add/@item.Id" class="btn btn-primary">Thêm vào giỏ hàng</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<tr>
+    <td colspan="9">
+        @{
+            int PrevPage = ViewBag.Page - 1;
+            if (PrevPage <= 0)
+            {
+                PrevPage = 1;
+            }
+            int NextPage = ViewBag.Page + 1;
+            if (NextPage > ViewBag.NoOfPages)
+            {
+                NextPage = ViewBag.NoOfPages;
+            }
+        }
+
+        <ul class="pagination justify-content-center">
+            <li class="page-item">
+                @Html.ActionLink("Prev", "Index", new { SortClumn = ViewBag.SortClumn, IconClass = ViewBag.IconClass, page = PrevPage, search = ViewBag.Search }, new { @class = "page-link" })
+            </li>
+
+            @for (int i = 0; i < ViewBag.NoOfPages; i++)
+            {
+                <li class="page-item @(i + 1 == ViewBag.Page ? "active" : "")">
+                    @Html.ActionLink((i + 1).ToString(), "Index", new { SortClumn = ViewBag.SortClumn, IconClass = ViewBag.IconClass, page = i + 1, search = ViewBag.Search }, new { @class = "page-link" })
+                </li>
+            }
+
+            <li class="page-item">
+                @Html.ActionLink("Next", "Index", new { SortClumn = ViewBag.SortClumn, IconClass = ViewBag.IconClass, page = NextPage, search = ViewBag.Search }, new { @class = "page-link" })
+            </li>
+        </ul>
+    </td>
+</tr>
+

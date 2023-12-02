@@ -1,0 +1,55 @@
+﻿@model CodeFirst.Models.Product
+@{
+    ViewBag.Title = "Edit";
+}
+
+<div class="container mt-5">
+    <h2>Edit Product</h2>
+
+    @using (Html.BeginForm("Edit", "Products", FormMethod.Post, new { @class = "needs-validation", novalidate = "true" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name)
+            @Html.TextBoxFor(model => model.Name, new { @class = "form-control", placeholder = "Product Name", required = "required" })
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Price)
+            @Html.TextBoxFor(model => model.Price, new { @class = "form-control", placeholder = "Price", required = "required", type = "number" })
+            @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description)
+            @Html.TextAreaFor(model => model.Description, new { @class = "form-control", placeholder = "Description", rows = "3", required = "required" })
+            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Image)
+            @Html.TextBoxFor(model => model.Image, new { @class = "form-control", placeholder = "Image URL" })
+            @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Brand_Id)
+            @Html.DropDownListFor(model => model.Brand_Id, new SelectList(ViewBag.Brands, "Id", "Name"), "Select Brand", new { @class = "form-control", required = "required" })
+            @Html.ValidationMessageFor(model => model.Brand_Id, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CategoryId)
+            @Html.DropDownListFor(model => model.CategoryId, new SelectList(ViewBag.Categories, "Id", "Name"), "Select Category", new { @class = "form-control", required = "required" })
+            @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+            @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-danger ml-2" })
+        </div>
+    }
+</div>

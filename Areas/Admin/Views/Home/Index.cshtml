@@ -1,0 +1,57 @@
+﻿@model List<CodeFirst.Models.Product>
+@{
+    ViewBag.Title = "Trang chủ";
+}
+
+<div class="promo-area">
+    <div class="zigzag-bottom"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-sm-6">
+                <div class="single-promo promo1">
+                    <i class='bx bxs-analyse'></i>
+                    <p>Đổi hàng 30 ngày</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="single-promo promo2">
+                    <i class='bx bxs-truck'></i>
+                    <p>Miễn phí vận chuyển</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="single-promo promo3">
+                    <i class='bx bxs-lock'></i>
+                    <p>Thanh toán an toàn</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="single-promo promo4">
+                    <i class='bx bxs-gift'></i>
+                    <p>Sản phẩm mới</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h2 class="text-center">Sản phẩm nổi bật</h2>
+<div class="row mt-3">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-3" id="@item.Id">
+            <div class="card p-3 m-3">
+                <a href="@Url.Action("Detail", "Products", new { id = item.Id })"><img src="/Image/@item.Image" class="card-img-top" /></a>
+                <div class="card-body">
+                    <a class="nav-link" href="@Url.Action("Detail", "Products", new { id = item.Id })">
+                        <h5 class="card-title" style="height: 2.5em; overflow: hidden; text-overflow: ellipsis;">@item.Name</h5>
+                    </a>
+                    <p class="card-text" style="height: 2em; overflow: hidden; text-overflow: ellipsis; color: red;">
+                        <b>@item.Price.Value.ToString("C")</b>
+                    </p>
+                    <a href="/Cart/Add/@item.Id" class="btn btn-primary">Thêm vào giỏ hàng</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

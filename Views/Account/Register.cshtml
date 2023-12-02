@@ -1,0 +1,65 @@
+﻿
+@model CodeFirst.ViewModel.RegisterVM
+
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-primary text-light">
+                    <h2 class="text-center">ĐĂNG KÝ</h2>
+                </div>
+                <div class="card-body">
+                    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form" }))
+                    {
+                        <div class="mb-3">
+                            @Html.LabelFor(temp => temp.Username, new { @class = "form-label" })
+                            @Html.TextBoxFor(temp => temp.Username, new { placeholder = "Username", @class = "form-control" })
+                            @Html.ValidationMessageFor(temp => temp.Username, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="mb-3">
+                            @Html.LabelFor(temp => temp.Email, new { @class = "form-label" })
+                            @Html.TextBoxFor(temp => temp.Email, new { placeholder = "Email", @class = "form-control" })
+                            @Html.ValidationMessageFor(temp => temp.Email, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="mb-3">
+                            @Html.LabelFor(temp => temp.Password)
+                            @Html.PasswordFor(temp => temp.Password, new { placeholder = "Password", @class = "form-control" })
+                            @Html.ValidationMessageFor(temp => temp.Password)
+                        </div>
+                        <div class="mb-3">
+                            @Html.LabelFor(temp => temp.ConfirmPassword)
+                            @Html.PasswordFor(temp => temp.ConfirmPassword, new { placeholder = "ConfirmPassword", @class = "form-control" })
+                            @Html.ValidationMessageFor(temp => temp.ConfirmPassword)
+                        </div>
+                        <div class="mb-3">
+                            @Html.LabelFor(temp => temp.Mobile)
+                            @Html.TextBoxFor(temp => temp.Mobile, new { placeholder = "Mobile", @class = "form-control" })
+                            @Html.ValidationMessageFor(temp => temp.Mobile)
+                        </div>
+                        <div class="mb-3">
+                            @Html.LabelFor(temp => temp.DateOfBirth)
+                            @Html.TextBoxFor(temp => temp.DateOfBirth, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+                            @Html.ValidationMessageFor(temp => temp.DateOfBirth)
+                        </div>
+                        <div class="mb-3">
+                            @Html.LabelFor(temp => temp.Address)
+                            @Html.TextBoxFor(temp => temp.Address, new { placeholder = "Address", @class = "form-control" })
+                            @Html.ValidationMessageFor(temp => temp.Address)
+                        </div>
+                        <div class="mb-3">
+                            @Html.LabelFor(temp => temp.City)
+                            @Html.TextBoxFor(temp => temp.City, new { placeholder = "City", @class = "form-control" })
+                            @Html.ValidationMessageFor(temp => temp.City)
+                        </div>
+                        <button type="submit" class="btn btn-primary">Đăng ký</button>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,55 @@
+﻿@model CodeFirst.Models.Product
+
+@{
+    ViewBag.Title = "Create";
+}
+@using System.Web.Mvc.Html
+<div class="container mt-5">
+    <h2>Tạo Sản Phẩm</h2>
+
+    @using (Html.BeginForm("Create", "Products", FormMethod.Post, new { area = "Admin", enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name)
+            @Html.TextBoxFor(model => model.Name, new { @class = "form-control", placeholder = "Tên sản phẩm", required = "required" })
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Price)
+            @Html.TextBoxFor(model => model.Price, new { @class = "form-control", placeholder = "Giá", required = "required", type = "number" })
+            @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description)
+            @Html.TextAreaFor(model => model.Description, new { @class = "form-control", placeholder = "Mô tả", rows = "3", required = "required" })
+            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Image, "Tên sản phẩm")
+            <input type="file" name="imageFile" id="imageFile" class="form-control" />
+            @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Brand_Id)
+            @Html.TextBoxFor(model => model.Brand_Id, new { @class = "form-control", placeholder = "ID Thương hiệu", required = "required" })
+            @Html.ValidationMessageFor(model => model.Brand_Id, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CategoryId)
+            @Html.TextBoxFor(model => model.CategoryId, new { @class = "form-control", placeholder = "ID Danh mục", required = "required" })
+            @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+        </div>
+
+        @Html.ValidationSummary()
+        <button type="submit" class="btn btn-primary">Tạo</button>
+        <a href="/admin/products" class="btn btn-danger">Hủy</a>
+    }
+</div>

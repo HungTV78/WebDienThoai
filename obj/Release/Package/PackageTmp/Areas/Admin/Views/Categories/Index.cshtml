@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    //Layout = "~/Areas/Admin/Views/Shared/AdminLayoutPage1.cshtml";
+}
+
+<h2>Categories</h2>
+<table class="table">
+    <tr>
+        <th>Category ID</th>
+        <th>Category Name</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Name</td>
+        </tr>
+    }
+</table>

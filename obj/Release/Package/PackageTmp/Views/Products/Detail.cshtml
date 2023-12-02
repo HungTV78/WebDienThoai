@@ -1,0 +1,38 @@
+﻿@model CodeFirst.Models.Product
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-6">
+            @if (!string.IsNullOrEmpty(Model.Image))
+            {
+                <img src="/Image/@Model.Image" class="img-fluid" alt="@Model.Name">
+            }
+            else
+            {
+                <p>No image available</p>
+            }
+        </div>
+        <div class="col-md-6">
+            <h2>@Model.Name</h2>
+            @if (Model.Price.HasValue)
+            {
+                <p class="text-danger"><b>@Model.Price.Value.ToString("C")</b></p>
+            }
+            else
+            {
+                <p>Price not available</p>
+            }
+            <p>@Model.Description</p>
+            <a href="#" class="btn btn-primary">Thêm vào giỏ hàng</a>
+            <a href="#" class="btn btn-danger">Mua ngay</a>
+            <div class="row mt-3">
+                <a href="@Url.Action("Index", "Products")">Quay lại</a>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,23 @@
+﻿@model List<CodeFirst.Models.Brand>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Brands</h2>
+
+<table class="table">
+    <tr>
+        <th>Brand ID</th>
+        <th>Brand Name</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Name</td>
+        </tr>
+    }
+</table>
+

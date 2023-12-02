@@ -1,0 +1,29 @@
+﻿@model CodeFirst.Models.Product
+@{
+    ViewBag.Title = "Detail";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-6">
+            <img src="/Image/@Model.Image" class="img-fluid" alt="@Model.Name">
+        </div>
+        <div class="col-md-6">
+            <h2>@Model.Name</h2>
+            <p class="text-danger"><b>@Model.Price.Value.ToString("C")</b></p>
+            <p>@Model.Description</p>
+            <a href="#" class="btn btn-primary">Thêm vào giỏ hàng</a>
+            <a href="#" class="btn btn-danger">Mua ngay</a>
+            <div class="row mt-3">
+                <a href="/admin/products/index">Quay lại danh sách sản phẩm</a>
+            </div>
+
+            <div class="row mt-3">
+                <div class="btn-group">
+                    <a href="@Url.Action("Edit", "Products", new { id = Model.Id })" class="btn btn-warning">Chỉnh sửa</a>
+                    <a href="@Url.Action("Delete", "Products", new { id = Model.Id })" class="btn btn-danger">Xóa</a>  
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
